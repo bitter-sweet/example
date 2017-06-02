@@ -6,3 +6,5 @@
 - for ... of(循环iterable) for ... in(兼容 循环对象)
 - set无重复的值 去除数组重复值 array.from(new Set(array));
 # Promise
+- promise.all([p1,p2]) 并行执行多个promise
+- promise.race([p1,p2]) 只处理率先执行的promise结果
