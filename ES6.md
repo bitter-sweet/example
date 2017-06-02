@@ -5,3 +5,4 @@
 # Map Set
 - for ... of(循环iterable) for ... in(兼容 循环对象)
 - set无重复的值 去除数组重复值 array.from(new Set(array));
+# Promise
