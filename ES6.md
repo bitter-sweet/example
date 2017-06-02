@@ -8,3 +8,4 @@
 # Promise
 - promise.all([p1,p2]) 并行执行多个promise
 - promise.race([p1,p2]) 只处理率先执行的promise结果
+# map set
