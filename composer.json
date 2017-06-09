@@ -1,0 +1,11 @@
+{
+    "name": "myapi/myapi",
+    "description": "it's my first repo",
+    "authors": [
+        {
+            "name": "Ming Gang",
+            "email": "1367000899@qq.com"
+        }
+    ],
+    "require": {}
+}
