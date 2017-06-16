@@ -9,23 +9,23 @@
 ```
 
 * 浏览器返回上一步强制刷新
-  * js
 
 ```js
+//JS
 window.onpageshow = function(event) {
     if (event.persisted) {
         window.location.reload();
     }
-}
-```
-
-* JQuery
-
-```js
+};
+//JQuery
 $(window).bind("pageshow", function(event) {
     if (event.originalEvent.persisted) {window.location.reload();}
 });
 ```
+
+
+
+
 
 
 
