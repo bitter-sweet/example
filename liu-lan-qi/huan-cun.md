@@ -18,8 +18,6 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header('Pragma: no-cache');
 ```
 
-
-
 ### 浏览器返回上一步强制刷新
 
 ```js
