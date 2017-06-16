@@ -1,6 +1,11 @@
 ### 文件上传例子
 
 > ```js
+> 前端html
+>     <form method="post" action="/home/fileUpload" enctype="multipart/form-data">
+>        <input type="file" name="upfile" size="50" multiple="multiple" />
+>    </form>
+> //服务端
 > const multiparty = require('multiparty');
 > var form = new multiparty.Form({ uploadDir: './public/files' });
 >     form.parse(req, function(err, fields, files) {
