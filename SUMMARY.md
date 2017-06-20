@@ -9,6 +9,8 @@
     * [注意事项](nginx/pei-zhi/zhu-yi-shi-xiang.md)
 * 浏览器
   * [缓存](liu-lan-qi/huan-cun.md)
-* [Redis](redis.md)
+* Redis
   * [远程主机访问](redis/yuan-cheng-zhu-ji-fang-wen.md)
+
+
 
