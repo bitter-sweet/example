@@ -1,37 +1,21 @@
-```
-
-        <div id="container">
-            
-            
-            <form action="/topic/create" method="post" enctype="multipart/form-data" id="createTopic">
-                <div class="main-box">
-
-
-                    <div class="item-box">
-                        <h4>话题封面</h4>
-                        <p>
-                        <form id="image" enctype="multipart/form-data">
-                        <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
-    <span id="percentage"></span><span id="time"></span>
-                        <input type="file"   name="image" id="topicBackground" multiple="multiple" onchange="uploadImage()" >
-                        <!-- <button type="button" class="btn btn-info" onclick="uploadImage()">上传图片</button> -->
-                        </form>
-                        <input type="hidden" class="required" name="topic_background" id="topic_background" value="" placeholder="话题封面" />
-                        </p>
-
-                    </div>
-
-
-
-                    <div class="item-box inp-0711-2">
-                        <button type="button" class="btn btn-info" onclick="create()">完成</button>
-                    </div>
-
-                </div>
-            </div>
+```html
+<div id="container">
+    <div class="main-box">
+        <div class="item-box">
+            <h4>话题封面</h4>
+            <form id="image" enctype="multipart/form-data">
+            <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
+            <span id="percentage"></span><span id="time"></span>
+            <input type="file"   name="image" id="topicBackground" multiple="multiple" onchange="uploadImage()" >
+            </form>
+            <input type="hidden" class="required" name="topic_background" id="topic_background" value="" placeholder="话题封面" />
         </div>
+        <div class="item-box inp-0711-2">
+            <button type="button" class="btn btn-info">完成</button>
+        </div>
+    </div>
+</div>
 <script>
-
 function uploadImage(){
     var formData = new FormData(); 
     formData.append('image', document.querySelector('#topicBackground').files[0]);
@@ -47,61 +31,59 @@ function uploadImage(){
             xhr.send(formData); //开始上传，发送form数据
 }
 
-        //上传进度实现方法，上传过程中会频繁调用该方法
-        function progressFunction(evt) {
-            
-             var progressBar = document.getElementById("progressBar");
-             var percentageDiv = document.getElementById("percentage");
-             // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
-             if (evt.lengthComputable) {//
-                 progressBar.max = evt.total;
-                 progressBar.value = evt.loaded;
-                 percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
-             }
-            
-            var time = document.getElementById("time");
-            var nt = new Date().getTime();//获取当前时间
-            var pertime = (nt-ot)/1000; //计算出上次调用该方法时到现在的时间差，单位为s
-            ot = new Date().getTime(); //重新赋值时间，用于下次计算
-            
-            var perload = evt.loaded - oloaded; //计算该分段上传的文件大小，单位b       
-            oloaded = evt.loaded;//重新赋值已上传文件大小，用以下次计算
-        
-            //上传速度计算
-            var speed = perload/pertime;//单位b/s
-            var bspeed = speed;
-            var units = 'b/s';//单位名称
-            if(speed/1024>1){
-                speed = speed/1024;
-                units = 'k/s';
-            }
-            if(speed/1024>1){
-                speed = speed/1024;
-                units = 'M/s';
-            }
-            speed = speed.toFixed(1);
-            //剩余时间
-            var resttime = ((evt.total-evt.loaded)/bspeed).toFixed(1);
-            time.innerHTML = '，速度：'+speed+units+'，剩余时间：'+resttime+'s';
-               if(bspeed==0)
-                time.innerHTML = '上传已取消';
-        }
-        //上传成功响应
-        function uploadComplete(evt) {
-         //服务断接收完文件返回的结果
-         //    alert(evt.target.responseText);
-             alert("上传成功！");
-        }
-        //上传失败
-        function uploadFailed(evt) {
-            alert("上传失败！");
-        }
-          //取消上传
-        function cancleUploadFile(){
-            xhr.abort();
-        }
-</script>
+//上传进度实现方法，上传过程中会频繁调用该方法
+function progressFunction(evt) {
+     var progressBar = document.getElementById("progressBar");
+     var percentageDiv = document.getElementById("percentage");
+     // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
+     if (evt.lengthComputable) {//
+         progressBar.max = evt.total;
+         progressBar.value = evt.loaded;
+         percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
+     }
 
+    var time = document.getElementById("time");
+    var nt = new Date().getTime();//获取当前时间
+    var pertime = (nt-ot)/1000; //计算出上次调用该方法时到现在的时间差，单位为s
+    ot = new Date().getTime(); //重新赋值时间，用于下次计算
+
+    var perload = evt.loaded - oloaded; //计算该分段上传的文件大小，单位b       
+    oloaded = evt.loaded;//重新赋值已上传文件大小，用以下次计算
+
+    //上传速度计算
+    var speed = perload/pertime;//单位b/s
+    var bspeed = speed;
+    var units = 'b/s';//单位名称
+    if(speed/1024>1){
+        speed = speed/1024;
+        units = 'k/s';
+    }
+    if(speed/1024>1){
+        speed = speed/1024;
+        units = 'M/s';
+    }
+    speed = speed.toFixed(1);
+    //剩余时间
+    var resttime = ((evt.total-evt.loaded)/bspeed).toFixed(1);
+    time.innerHTML = '，速度：'+speed+units+'，剩余时间：'+resttime+'s';
+       if(bspeed==0)
+        time.innerHTML = '上传已取消';
+}
+//上传成功响应
+function uploadComplete(evt) {
+ //服务断接收完文件返回的结果
+ //    alert(evt.target.responseText);
+     alert("上传成功！");
+}
+//上传失败
+function uploadFailed(evt) {
+    alert("上传失败！");
+}
+  //取消上传
+function cancleUploadFile(){
+    xhr.abort();
+}
+</script>
 ```
 
 
